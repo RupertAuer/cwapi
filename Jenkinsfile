@@ -15,7 +15,7 @@ pipeline {
     stage('Docker Build') {
       agent any
       steps {
-        sh 'docker build -f ./cwapi/Dockerfile .'
+        sh 'docker-compose build'
       }
     }
   }
