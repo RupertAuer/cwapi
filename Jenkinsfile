@@ -20,7 +20,7 @@ pipeline {
 
         script {
           withCredentials([usernamePassword(credentialsId: 'acr-credentials', passwordVariable: 'acrPassword', usernameVariable: 'acrUser')]) {
-            sh "docker login -u ${env.acrUser} -p ${env.acrPassword}"
+            sh "docker https://mywoshtestregistry.azurecr.io/cwapi login -u ${env.acrUser} -p ${env.acrPassword}"
             sh 'docker push mywoshtestregistry.azurecr.io/cwapi'
 
           }
