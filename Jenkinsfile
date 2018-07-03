@@ -15,9 +15,9 @@ pipeline {
     stage('Docker Build and Push') {
       steps {
         script {
-          container = docker.build("mywoshtestregistry.azurecr.io/cwapi", "-f ./cwapi/Dockerfile .")
+          container = docker.build("mywoshtestregistry.azurecr.io/cwapi:${env.BUILD_ID}", "-f ./cwapi/Dockerfile .")
           docker.withRegistry('https://mywoshtestregistry.azurecr.io', 'acr-credentials') {
-            container.push('latest')
+            container.push()
           }
         }
 
