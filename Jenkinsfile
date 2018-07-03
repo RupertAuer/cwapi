@@ -19,9 +19,9 @@ pipeline {
         }
 
         script {
-          docker.withRegistry('https://mywoshtestregistry.azurecr.io', 'acr-credentials') {
-            def img = docker.image(mywoshtestregistry.azurecr.io/cwapi)
-            img.push('latest')
+          withCredentials([usernamePassword(credentialsId: 'acr-credentials', passwordVariable: 'acrPassword', usernameVariable: 'acrUser')]) {
+            sh "docker login -u ${env.acrUser} -p ${env.acrPassword}"
+            sh 'docker push mywoshtestregistry.azurecr.io/cwapi'
 
           }
         }
